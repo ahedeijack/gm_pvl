@@ -4,10 +4,10 @@ create database storage_pvl;
 use storage_pvl;
  
 CREATE TABLE producto (
-    id_prod INT NOT NULL AUTO_INCREMENT,
+    id_prod BigInt NOT NULL AUTO_INCREMENT,
     nombre_prod VARCHAR(255) NOT NULL,
-    fk_marca INT NOT NULL,
-    fk_categoria INT NOT NULL,
+    fk_marca BigInt NOT NULL,
+    fk_categoria BigInt NOT NULL,
     existencias_prod INT NOT NULL,
     codigo_prod VARCHAR(18),
     precio_prod FLOAT NOT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE producto (
 );
 
 create table cliente(
-id_cte int not null auto_increment,
+id_cte BigInt NOT NULL AUTO_INCREMENT,
 nombre_cte varchar(255) not null,
 app_cte varchar(255),
 apm_cte varchar(255),
@@ -25,47 +25,48 @@ primary key(id_cte)
 );
 
 CREATE TABLE empleado (
-    id_emp INT NOT NULL AUTO_INCREMENT,
+    id_emp BigInt NOT NULL AUTO_INCREMENT,
     nom_emp VARCHAR(18) NOT NULL,
     app_emp VARCHAR(18),
     apm_emp VARCHAR(18),
+    correo_emp VARCHAR(40) NOT NULL,
+    contrasena_emp VARCHAR(40) NOT NULL,
+    tel_emp VARCHAR(15),
     PRIMARY KEY (id_emp)
 );
 
 
 CREATE TABLE marca (
-    id_marca INT NOT NULL AUTO_INCREMENT,
+    id_marca BigInt NOT NULL AUTO_INCREMENT,
     nombre_marca VARCHAR(18) NOT NULL,
-    fk_prov INT NOT NULL,
+    fk_prov BigInt NOT NULL,
     PRIMARY KEY (id_marca)
 );
 
 CREATE TABLE proveedor (
-    id_prov INT NOT NULL AUTO_INCREMENT,
+    id_prov BigInt NOT NULL AUTO_INCREMENT,
     nombre_prov VARCHAR(80) NOT NULL,
     direccion_prov VARCHAR(255),
     PRIMARY KEY (id_prov)
 );
 
 CREATE TABLE categoria (
-    id_categoria INT NOT NULL AUTO_INCREMENT,
+    id_categoria BigInt NOT NULL AUTO_INCREMENT,
     nombre_categoria VARCHAR(18) NOT NULL,
     PRIMARY KEY (id_categoria)
 );
 
 CREATE TABLE ticket (
-    id_ticket INT NOT NULL AUTO_INCREMENT,
-    fk_prod INT,
-    fk_precio FLOAT,
+    id_ticket BigInt NOT NULL AUTO_INCREMENT,
+    fk_trans BigInt NOT NULL,
     PRIMARY KEY (id_ticket)
 );
 
 CREATE TABLE transaccion (
-    id_trans INT NOT NULL PRIMARY KEY,
+    id_trans BigInt NOT NULL PRIMARY KEY,
     total_trans FLOAT NOT NULL,
-    fk_cte INT NOT NULL,
-    fk_emp INT NOT NULL,
-    fk_ticket INT NOT NULL
+    fk_cte BigInt NOT NULL,
+    fk_emp BigInt NOT NULL
 );
 
 /* tabla destino -> tabla origen  */
@@ -74,11 +75,11 @@ alter table producto add foreign key(fk_categoria) references categoria(id_categ
 
 alter table marca add foreign key (fk_prov) references proveedor(id_prov) on update cascade on delete cascade;
 
-alter table ticket add foreign key (fk_prod)references producto(id_prod) on update cascade on delete cascade; 
+alter table ticket add foreign key (fk_trans)references transaccion(id_trans) on update cascade on delete cascade; 
 
 alter table transaccion add foreign key (fk_cte) references cliente(id_cte) on update cascade on delete cascade;
 alter table transaccion add foreign key (fk_emp) references empleado(id_emp) on update cascade on delete cascade; 
-alter table transaccion add foreign	key (fk_ticket) references ticket(id_ticket) on update cascade on delete cascade;
+-- alter table transaccion add foreign	key (fk_ticket) references ticket(id_ticket) on update cascade on delete cascade; --
 
 select * from categoria;
 insert into categoria (nombre_categoria) values ('Bebidas');
@@ -156,10 +157,12 @@ insert into cliente (nombre_cte, app_cte, apm_cte, compras_cte, correo_cte) valu
 insert into cliente (nombre_cte, app_cte, apm_cte, compras_cte, correo_cte) values ('Raul','Quintana','Roo',2,'');
 
 select * from empleado;
-insert into empleado (nom_emp, app_emp, apm_emp) values ('Mayelea Ester','De Santiago','Barragan');
-insert into empleado (nom_emp, app_emp, apm_emp) values ('Juan','Yañez','');
-insert into empleado (nom_emp, app_emp, apm_emp) values ('Jose Misael','Adame','Sandoval');
-insert into empleado (nom_emp, app_emp, apm_emp) values ('Mar','Alaniz','');
-
-
+insert into empleado (nom_emp, app_emp, apm_emp, correo_emp, contrasena_emp, tel_emp) values ('Mayelea Ester',
+'De Santiago','Barragan','mayela@outlook.com', '12345678', '8712395965');
+insert into empleado (nom_emp, app_emp, apm_emp, correo_emp, contrasena_emp, tel_emp) values ('Juan','Yañez',''
+,'yanez@outlook.com', '12345678', '8712395966');
+insert into empleado (nom_emp, app_emp, apm_emp, correo_emp, contrasena_emp, tel_emp) values ('Jose Misael','Adame','Sandoval'
+,'elmejorsoy10@outlook.com', '12345678', '8712395967');
+insert into empleado (nom_emp, app_emp, apm_emp, correo_emp, contrasena_emp, tel_emp) values ('Mar','Alaniz',''
+,'marcito@outlook.com', '12345678', '8712395968');
 

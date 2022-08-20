@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.gpomark.pvl.gpomarkpvl.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<Pane prefHeight="607.0" prefWidth="1097.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gpomark.pvl.gpomarkpvl.HelloController">
+   <children>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+       <Label fx:id="welcomeText" layoutX="50.0" layoutY="51.0" prefHeight="77.0" prefWidth="113.0" />
+       <Button layoutX="67.0" layoutY="136.0" onAction="#onHelloButtonClick" text="All Products" />
+      <Button layoutX="67.0" layoutY="185.0" mnemonicParsing="false" text="All Categorias" />
+      <Button layoutX="67.0" layoutY="229.0" mnemonicParsing="false" text="All Clientes" />
+      <Button layoutX="67.0" layoutY="278.0" mnemonicParsing="false" text="All Empleados" />
+      <Button layoutX="66.0" layoutY="323.0" mnemonicParsing="false" text="All Marcas" />
+      <Button layoutX="67.0" layoutY="371.0" mnemonicParsing="false" text="All Proveedores" />
+      <Button layoutX="67.0" layoutY="414.0" mnemonicParsing="false" text="All Tickets" />
+      <Button layoutX="67.0" layoutY="462.0" mnemonicParsing="false" text="All Transacciones" />
+   </children>
+</Pane>
